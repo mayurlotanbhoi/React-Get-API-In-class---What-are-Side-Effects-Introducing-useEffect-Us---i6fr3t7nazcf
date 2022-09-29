@@ -7,17 +7,11 @@ import { useEffect , useState } from 'react';
  * @url : https://jsonplaceholder.typicode.com/users
  * @output : show the names of users to frontend like below. 
  * 0. Leanne Graham
-
 1. Ervin Howell
-
 2. Clementine Bauch
-
 3. Patricia Lebsack
-
 4. Chelsey Dietrich
-
 5. Mrs. Dennis Schulist
-
 6. Kurtis Weissnat
  */
 
@@ -28,14 +22,19 @@ function App() {
   /**
    * fetch data from api on mount. 
    */
-  
-    useEffect(async () => {
-    const responce = await fetch("https://jsonplaceholder.typicode.com/users");
-    let Data1 = await responce.json();
-    
-    setData(Data1);
-    // console.log(data);
-  }, []);
+  const fetchData = () => {
+    fetch("https://jsonplaceholder.typicode.com/users").then(response => {
+      return response.json()
+    })
+    .then(data => {
+      setData(data)
+      // console.log(data);
+    })
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
+
 
   return (
   <div className='App'>
